@@ -1,3 +1,4 @@
+// --- SHOPPING CART SETUP ---
 const cartItems = document.getElementById("cart-items");
 const totalDisplay = document.getElementById("total");
 let cart = [];
