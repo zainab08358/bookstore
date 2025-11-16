@@ -1,39 +1,25 @@
-const bookList = document.getElementById("book-list");
+// Get DOM elements
 const cartItems = document.getElementById("cart-items");
 const totalDisplay = document.getElementById("total");
+
+// Initialize cart
 let cart = [];
 let total = 0;
 
-// --- DISPLAY BOOKS ---
-if (bookList) {
-  books.forEach((book, index) => {
-    const div = document.createElement("div");
-    div.classList.add("book");
-    div.innerHTML = `
-      <img src="${book.image}" alt="${book.title}">
-      <h3>${book.title}</h3>
-      <p>Price: $${book.price.toFixed(2)}</p>
-      <button onclick="addToCart(${index})">Add to Cart</button>
-    `;
-    bookList.appendChild(div);
-  });
-}
-
-// --- ADD TO CART ---
-function addToCart(index) {
-  const selectedBook = books[index];
-  cart.push(selectedBook);
-  total += selectedBook.price;
+// Add to cart function (called from HTML buttons)
+function addToCart(title, price) {
+  // Add item to cart array
+  cart.push({ title, price });
+  total += price;
   updateCart();
 }
 
-// --- UPDATE CART ---
+// Update cart display
 function updateCart() {
-  if (!cartItems) return;
   cartItems.innerHTML = "";
-  cart.forEach(book => {
+  cart.forEach(item => {
     const li = document.createElement("li");
-    li.textContent = `${book.title} - $${book.price.toFixed(2)}`;
+    li.textContent = `${item.title} - $${item.price.toFixed(2)}`;
     cartItems.appendChild(li);
   });
   totalDisplay.textContent = `Total: $${total.toFixed(2)}`;
